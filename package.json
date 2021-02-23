@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-apollo-typescript-tailwindcss-boilerplate",
+  "name": "spacex-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
+    "@headlessui/react": "^0.3.1",
     "graphql": "^15.5.0",
     "next": "10.0.7",
     "react": "17.0.1",
