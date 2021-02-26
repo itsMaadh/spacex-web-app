@@ -1,9 +1,34 @@
 import Title from "../components/common/Title";
 import Head from "next/head";
+import { Player } from "@lottiefiles/react-lottie-player";
+import { gql } from "@apollo/client";
+import { initializeApollo } from "../lib/apolloClient";
+import Card from "../components/common/Card";
 
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+const HISTORIES_QUERY = gql`
+  {
+    histories(limit: 3, offset: 1) {
+      event_date_utc
+      details
+      title
+      flight {
+        mission_name
+        details
+        links {
+          flickr_images
+        }
+      }
+    }
+  }
+`;
 
-export default function Home() {
+type Props = {
+  history: any;
+  lottie: any;
+};
+
+export default function Home({ history, lottie }: Props) {
+  console.log(history);
   return (
     <div>
       <Head>
@@ -19,7 +44,7 @@ export default function Home() {
           <Player
             autoplay
             loop
-            src="https://assets6.lottiefiles.com/packages/lf20_ZQhQzO.json"
+            src={lottie}
             style={{ height: "100%", width: "100%" }}
           />
         </div>
@@ -35,8 +60,26 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <Title text="Previous launches" />
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:space-x-4 pb-10 pt-5">
+        {history.histories.map((pastHistory) => (
+          <Card
+            image={pastHistory.flight.links.flickr_images[2]}
+            title={pastHistory.title}
+            date={pastHistory.event_date_utc}
+            key={pastHistory.title}
+          />
+        ))}
+      </div>
     </div>
   );
+}
+
+export async function getServerSideProps(props) {
+  const apolloClient = initializeApollo();
+  const data = await apolloClient.query({ query: HISTORIES_QUERY });
+  const astronaut = await fetch(
+    "https://assets6.lottiefiles.com/packages/lf20_ZQhQzO.json"
+  );
+  return { props: { history: data.data, lottie: await astronaut.json() } };
 }
