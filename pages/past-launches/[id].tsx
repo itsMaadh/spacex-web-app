@@ -31,12 +31,11 @@ export default function PastLaunch({ data }: Props) {
       <p className="lg:text-lg my-5">{data.details}</p>
       <div className="grid grid-cols-1 lg:grid-cols-3 pb-10">
         {data.flight.links.flickr_images.map((image) => (
-          <a href={image} target="_blank">
+          <a href={image} target="_blank" key={image}>
             <img
               className="mt-2 sm:mt-4 sm:h-64 sm:w-full sm:object-cover object-center md:pr-4"
               src={image}
               alt={data.title}
-              key={image}
             />
           </a>
         ))}
