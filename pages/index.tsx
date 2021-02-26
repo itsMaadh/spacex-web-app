@@ -4,16 +4,15 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { gql } from "@apollo/client";
 import { initializeApollo } from "../lib/apolloClient";
 import Card from "../components/common/Card";
+import { History } from "../models/histories-query";
 
 const HISTORIES_QUERY = gql`
   {
     histories(limit: 3, offset: 1) {
+      id
       event_date_utc
-      details
       title
       flight {
-        mission_name
-        details
         links {
           flickr_images
         }
@@ -23,12 +22,11 @@ const HISTORIES_QUERY = gql`
 `;
 
 type Props = {
-  history: any;
+  history: History;
   lottie: any;
 };
 
 export default function Home({ history, lottie }: Props) {
-  console.log(history);
   return (
     <div>
       <Head>
@@ -67,6 +65,7 @@ export default function Home({ history, lottie }: Props) {
             image={pastHistory.flight.links.flickr_images[2]}
             title={pastHistory.title}
             date={pastHistory.event_date_utc}
+            url={`past-launches/${pastHistory.id}`}
             key={pastHistory.title}
           />
         ))}
