@@ -36,7 +36,7 @@ export default function Layout(props: Props) {
 
   return (
     <div>
-      <div className="relative bg-white">
+      <div className="relative bg-white font-headline">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -77,19 +77,19 @@ export default function Layout(props: Props) {
                 href="#"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                Docs
+                Dragons
               </a>
               <a
                 href="#"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                Pricing
+                Missions
               </a>
               <a
                 href="#"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                Docs
+                About us
               </a>
             </nav>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -103,16 +103,8 @@ export default function Layout(props: Props) {
           </div>
         </div>
       </div>
-      <Transition
-        show={showNavbar}
-        enter="transition ease-out duration-100 transform"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-75 transform"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+      <Transition show={showNavbar}>
+        <div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden z-20">
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
@@ -186,7 +178,7 @@ export default function Layout(props: Props) {
           </div>
         </div>
       </Transition>
-      <div className="bg-white">
+      <div className="bg-white font-headline">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">{props.children}</div>
       </div>
     </div>
