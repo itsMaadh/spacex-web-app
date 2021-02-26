@@ -1,11 +1,12 @@
-export interface History {
-  histories?: Histories[] | null;
+export interface HistoriesQuery {
+  histories?: History[] | null;
 }
-export interface Histories {
+export interface History {
   __typename: string;
   id: number;
   event_date_utc: Date;
   title: string;
+  details?: string;
   flight: Flight;
 }
 export interface Flight {
